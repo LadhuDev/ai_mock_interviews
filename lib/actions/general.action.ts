@@ -8,7 +8,7 @@ import {google} from "@ai-sdk/google";
 export async function getInterviewsByUserId(userId: string): Promise<Interview[] | null> {
     const interviews = await db
         .collection('interviews')
-        .where('userid', '==', userId)
+        .where('userId', '==', userId)
         .orderBy('createdAt', 'desc')
         .get();
 
@@ -25,7 +25,7 @@ export async function getLatestInterviews(params: GetLatestInterviewsParams): Pr
         .collection('interviews')
         .orderBy('createdAt', 'desc')
         .where('finalized', '==', true)
-        .where('userid', '!=', userId)
+        .where('userId', '!=', userId)
         .limit(limit)
         .get();
 
@@ -101,7 +101,7 @@ export async function getFeedbackByInterviewId(params: GetFeedbackByInterviewIdP
     const feedback = await db
         .collection('feedback')
         .where('interviewId', '==', interviewId)
-        .where('userid', '==', userId)
+        .where('userId', '==', userId)
         .limit(1)
         .get();
 
